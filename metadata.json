@@ -1,0 +1,6 @@
+{
+  "name": "SmartLearn AI Tutor",
+  "description": "An interactive, personalized AI Tutor application with Profile and scientific Calculator integrations, backed by a Spring Boot-style REST API architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

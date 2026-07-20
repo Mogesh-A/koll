@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartLearn AI Tutor - Math Helper</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="flex h-full font-sans antialiased overflow-hidden">
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:flex flex-col w-64 bg-slate-900 border-r border-slate-800 shrink-0">
+    <div class="p-6 flex items-center gap-3 border-b border-slate-800">
+      <div class="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-xl">
+        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight tracking-tight text-white">SmartLearn</h1>
+        <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">AI Companion</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 p-4 space-y-1">
+      <a href="/index.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-xl transition-all duration-200">
+        <i data-lucide="message-square" class="w-5 h-5 text-slate-500"></i>
+        <span>AI Tutor Chat</span>
+      </a>
+      <a href="/Profile.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-xl transition-all duration-200">
+        <i data-lucide="user" class="w-5 h-5 text-slate-500"></i>
+        <span>My Study Profile</span>
+      </a>
+      <a href="/Calculator.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-white bg-slate-800 rounded-xl transition-all duration-200">
+        <i data-lucide="calculator" class="w-5 h-5 text-emerald-400"></i>
+        <span>Math Helper Calc</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer / Status -->
+    <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+      <div class="flex items-center gap-3 p-2 rounded-xl bg-slate-800/20 border border-slate-800/50">
+        <div class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </div>
+        <div class="text-xs">
+          <p class="font-medium text-slate-300">Java Spring Boot REST API</p>
+          <p class="text-slate-500">Service Active</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col min-w-0 bg-slate-950 h-full relative overflow-y-auto">
+
+    <!-- Mobile Top Header -->
+    <header class="flex md:hidden items-center justify-between p-4 bg-slate-900 border-b border-slate-800">
+      <div class="flex items-center gap-2">
+        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+          <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        </div>
+        <h1 class="font-bold text-base text-white">SmartLearn</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/index.html" class="p-2 text-slate-400 hover:text-white rounded-lg"><i data-lucide="message-square" class="w-5 h-5"></i></a>
+        <a href="/Profile.html" class="p-2 text-slate-400 hover:text-white rounded-lg"><i data-lucide="user" class="w-5 h-5"></i></a>
+        <a href="/Calculator.html" class="p-2 text-emerald-400 bg-slate-800 rounded-lg"><i data-lucide="calculator" class="w-5 h-5"></i></a>
+      </div>
+    </header>
+
+    <!-- Title Header -->
+    <header class="p-6 md:p-8 border-b border-slate-900/60 bg-slate-900/10">
+      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20">
+            <i data-lucide="calculator" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h1 class="text-xl md:text-2xl font-bold text-white tracking-tight">Math Helper Calculator</h1>
+            <p class="text-xs text-slate-400 mt-0.5">Solve math equations locally & explain them with AI Tutor</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Calculator Body Container -->
+    <div class="p-6 md:p-8 max-w-4xl mx-auto w-full grid grid-cols-1 lg:grid-cols-5 gap-8">
+      
+      <!-- Left 3 columns: Calculator Grid -->
+      <section class="lg:col-span-3 flex flex-col items-center">
+        <div class="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl shadow-slate-950/40 relative">
+          
+          <!-- Screen Display -->
+          <div class="bg-slate-950 border border-slate-800/60 rounded-2xl p-4 mb-6 text-right font-mono flex flex-col justify-between h-28 overflow-hidden">
+            <div id="calc-formula" class="text-slate-500 text-sm overflow-x-auto whitespace-nowrap min-h-[20px]"></div>
+            <div id="calc-display" class="text-white text-2xl font-bold overflow-x-auto whitespace-nowrap select-all">0</div>
+          </div>
+
+          <!-- Buttons Grid -->
+          <div class="grid grid-cols-4 gap-2.5">
+            <!-- Row 1: scientific/clear -->
+            <button onclick="pressClear()" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-rose-400 font-bold text-xs rounded-xl transition-all">AC</button>
+            <button onclick="pressBackspace()" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl transition-all">⌫</button>
+            <button onclick="pressKey('(')" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-sm rounded-xl transition-all">(</button>
+            <button onclick="pressKey(')')" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-sm rounded-xl transition-all">)</button>
+
+            <!-- Row 2: scientific functions -->
+            <button onclick="pressFunc('sin(')" class="p-3.5 bg-slate-800/60 hover:bg-slate-800 text-emerald-400 font-semibold text-xs rounded-xl transition-all">sin</button>
+            <button onclick="pressFunc('cos(')" class="p-3.5 bg-slate-800/60 hover:bg-slate-800 text-emerald-400 font-semibold text-xs rounded-xl transition-all">cos</button>
+            <button onclick="pressFunc('tan(')" class="p-3.5 bg-slate-800/60 hover:bg-slate-800 text-emerald-400 font-semibold text-xs rounded-xl transition-all">tan</button>
+            <button onclick="pressKey('/')" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-base rounded-xl transition-all">÷</button>
+
+            <!-- Row 3: numerical + operator -->
+            <button onclick="pressKey('7')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">7</button>
+            <button onclick="pressKey('8')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">8</button>
+            <button onclick="pressKey('9')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">9</button>
+            <button onclick="pressKey('*')" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-base rounded-xl transition-all">×</button>
+
+            <!-- Row 4: numerical + operator -->
+            <button onclick="pressKey('4')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">4</button>
+            <button onclick="pressKey('5')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">5</button>
+            <button onclick="pressKey('6')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">6</button>
+            <button onclick="pressKey('-')" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-base rounded-xl transition-all">-</button>
+
+            <!-- Row 5: numerical + operator -->
+            <button onclick="pressKey('1')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">1</button>
+            <button onclick="pressKey('2')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">2</button>
+            <button onclick="pressKey('3')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">3</button>
+            <button onclick="pressKey('+')" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-base rounded-xl transition-all">+</button>
+
+            <!-- Row 6: advanced / dot / equal -->
+            <button onclick="pressFunc('sqrt(')" class="p-3.5 bg-slate-800/60 hover:bg-slate-800 text-emerald-400 font-semibold text-xs rounded-xl transition-all">√</button>
+            <button onclick="pressKey('0')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">0</button>
+            <button onclick="pressKey('.')" class="p-3.5 bg-slate-950/60 hover:bg-slate-850 text-white font-bold text-base rounded-xl transition-all border border-slate-800/20">.</button>
+            <button onclick="pressEvaluate()" class="p-3.5 bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-black text-lg rounded-xl transition-all shadow-md shadow-emerald-500/10">=</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right 2 columns: AI Tutor Explanation Sync Portal -->
+      <section class="lg:col-span-2 space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-sm shadow-slate-950/20 flex flex-col justify-between h-full min-h-[350px]">
+          <div>
+            <div class="flex items-center gap-2.5 mb-4 text-emerald-400">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+              <h3 class="font-bold text-base text-white">AI Tutor Math Bridge</h3>
+            </div>
+            
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Struggling with the conceptual steps behind a calculation? Enter your equation, hit <strong class="text-emerald-400">Evaluate (=)</strong>, and click the button below. 
+            </p>
+
+            <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 space-y-3 mb-6">
+              <div>
+                <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Active Formula</span>
+                <span id="bridge-formula" class="text-sm font-mono text-slate-300 block mt-1">None entered</span>
+              </div>
+              <div class="border-t border-slate-800/60 pt-2">
+                <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Active Result</span>
+                <span id="bridge-result" class="text-lg font-mono font-bold text-white block mt-1">0</span>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            id="bridge-ai-btn"
+            onclick="sendFormulaToAI()"
+            disabled
+            class="w-full bg-slate-850 border border-slate-800 text-slate-500 font-bold px-6 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-200 cursor-not-allowed"
+          >
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            <span>Explain with AI Tutor 🎓</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Elements
+    const calcFormula = document.getElementById('calc-formula');
+    const calcDisplay = document.getElementById('calc-display');
+    const bridgeFormula = document.getElementById('bridge-formula');
+    const bridgeResult = document.getElementById('bridge-result');
+    const bridgeAiBtn = document.getElementById('bridge-ai-btn');
+
+    let currentInput = "0";
+    let isEvaluated = false;
+
+    // Helper functions
+    function pressKey(val) {
+      if (currentInput === "0" && val !== ".") {
+        currentInput = val;
+      } else {
+        currentInput += val;
+      }
+      isEvaluated = false;
+      updateDisplay();
+    }
+
+    // Advanced scientific func mapping
+    function pressFunc(func) {
+      if (currentInput === "0") {
+        currentInput = func;
+      } else {
+        currentInput += func;
+      }
+      isEvaluated = false;
+      updateDisplay();
+    }
+
+    function pressClear() {
+      currentInput = "0";
+      calcFormula.innerText = "";
+      isEvaluated = false;
+      updateDisplay();
+    }
+
+    function pressBackspace() {
+      if (currentInput.length > 1) {
+        currentInput = currentInput.slice(0, -1);
+      } else {
+        currentInput = "0";
+      }
+      isEvaluated = false;
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      calcDisplay.innerText = currentInput;
+    }
+
+    function pressEvaluate() {
+      try {
+        let cleanInput = currentInput
+          .replace(/sin\(/g, 'Math.sin(')
+          .replace(/cos\(/g, 'Math.cos(')
+          .replace(/tan\(/g, 'Math.tan(')
+          .replace(/sqrt\(/g, 'Math.sqrt(');
+
+        // Safe evaluation
+        let result = eval(cleanInput);
+
+        // Format result nice
+        if (typeof result === 'number' && !isNaN(result)) {
+          if (!Number.isInteger(result)) {
+            result = parseFloat(result.toFixed(5));
+          }
+        } else {
+          throw new Error("Invalid output");
+        }
+
+        calcFormula.innerText = currentInput + " =";
+        calcDisplay.innerText = result;
+
+        // Update Bridge Box info
+        bridgeFormula.innerText = currentInput;
+        bridgeResult.innerText = result;
+
+        // Enable AI Explanation button
+        bridgeAiBtn.disabled = false;
+        bridgeAiBtn.className = "w-full bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-bold px-6 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-200 hover:scale-[1.01] cursor-pointer shadow-lg shadow-emerald-500/10";
+
+        currentInput = result.toString();
+        isEvaluated = true;
+      } catch (err) {
+        calcDisplay.innerText = "Error";
+        currentInput = "0";
+        isEvaluated = false;
+        
+        // Disable bridge
+        bridgeAiBtn.disabled = true;
+        bridgeAiBtn.className = "w-full bg-slate-850 border border-slate-800 text-slate-500 font-bold px-6 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-200 cursor-not-allowed";
+      }
+    }
+
+    function sendFormulaToAI() {
+      const formula = bridgeFormula.innerText;
+      if (!formula || formula === "None entered") return;
+
+      // Redirect to index.html with query parameter
+      window.location.href = `/index.html?explain_math=${encodeURIComponent(formula)}`;
+    }
+  </script>
+</body>
+</html>

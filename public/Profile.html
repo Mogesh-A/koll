@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-900">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartLearn AI Tutor - Profile</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="flex h-full font-sans antialiased overflow-hidden bg-slate-50 text-slate-900">
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 shrink-0">
+    <div class="p-6 flex items-center gap-3 border-b border-slate-100 bg-white">
+      <div class="p-2.5 bg-indigo-600 text-white rounded-xl shadow-sm">
+        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight tracking-tight text-slate-900">SmartLearn</h1>
+        <span class="text-xs font-semibold text-indigo-600 tracking-wider uppercase">AI Companion</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 p-4 space-y-1 bg-white">
+      <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Project Workspace</div>
+      <a href="/index.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="message-square" class="w-5 h-5 text-slate-400"></i>
+        <span>AI Tutor Chat</span>
+      </a>
+      <a href="/Profile.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-indigo-700 bg-indigo-50 rounded-xl transition-all duration-200">
+        <i data-lucide="user" class="w-5 h-5 text-indigo-600"></i>
+        <span>My Study Profile</span>
+      </a>
+      <a href="/Calculator.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="calculator" class="w-5 h-5 text-slate-400"></i>
+        <span>Math Helper Calc</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer / Status -->
+    <div class="p-4 border-t border-slate-100 bg-slate-50/50">
+      <div class="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-200 shadow-sm">
+        <div class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
+        </div>
+        <div class="text-xs">
+          <p class="font-medium text-slate-700">Java Spring Boot REST API</p>
+          <p class="text-slate-400">Service Active</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col min-w-0 bg-slate-50 h-full relative overflow-y-auto">
+
+    <!-- Mobile Top Header -->
+    <header class="flex md:hidden items-center justify-between p-4 bg-white border-b border-slate-200">
+      <div class="flex items-center gap-2">
+        <div class="p-2 bg-indigo-600 text-white rounded-lg">
+          <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        </div>
+        <h1 class="font-bold text-base text-slate-900">SmartLearn</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/index.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="message-square" class="w-5 h-5"></i></a>
+        <a href="/Profile.html" class="p-2 text-indigo-700 bg-indigo-50 rounded-lg"><i data-lucide="user" class="w-5 h-5"></i></a>
+        <a href="/Calculator.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="calculator" class="w-5 h-5"></i></a>
+      </div>
+    </header>
+
+    <!-- Header Section -->
+    <div class="p-6 md:p-8 border-b border-slate-200 bg-white">
+      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <div class="w-16 h-16 rounded-2xl bg-indigo-600 text-white font-extrabold text-2xl flex items-center justify-center shadow-md shadow-indigo-600/10" id="profile-avatar">
+              M
+            </div>
+            <div class="absolute -bottom-1 -right-1 bg-white p-1 rounded-full border border-slate-200 shadow-sm">
+              <span class="block w-2.5 h-2.5 bg-indigo-600 rounded-full animate-pulse"></span>
+            </div>
+          </div>
+          <div>
+            <h1 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" id="profile-display-name">Mogesh</h1>
+            <p class="text-xs text-indigo-600 font-semibold mt-0.5 tracking-wider uppercase">Active Learning Account</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <i data-lucide="flame" class="w-6 h-6 text-orange-500 fill-orange-500"></i>
+          <div>
+            <div class="text-xs text-slate-400">Daily Study Streak</div>
+            <div class="text-sm font-bold text-slate-800">5 Consecutive Days!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Form / View -->
+    <div class="p-6 md:p-8 max-w-4xl mx-auto w-full space-y-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left: Basic Profile details -->
+        <section class="lg:col-span-2 space-y-6">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="text-base font-bold text-slate-900 mb-6 flex items-center gap-2.5">
+              <i data-lucide="user-cog" class="w-5 h-5 text-indigo-600"></i>
+              <span>Customize Learning Profile</span>
+            </h3>
+            
+            <form id="profile-form" class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Student Name</label>
+                  <input 
+                    type="text" 
+                    id="student-name" 
+                    class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Education Level</label>
+                  <select 
+                    id="education-level" 
+                    class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm"
+                  >
+                    <option value="Elementary">Elementary School</option>
+                    <option value="HighSchool">High School</option>
+                    <option value="Undergraduate">Undergraduate Student</option>
+                    <option value="Postgraduate">Postgraduate / Professional</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Primary Subject Interest</label>
+                  <input 
+                    type="text" 
+                    id="subject-area" 
+                    class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm"
+                    placeholder="e.g. Computer Science, Algebra, Physics"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Teaching Style Persona</label>
+                  <select 
+                    id="teaching-persona" 
+                    class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm"
+                  >
+                    <option value="socratic">Socratic Mentor (Guidance via Questions)</option>
+                    <option value="practical">Practical Developer (Direct & Coding-focused)</option>
+                    <option value="science">Scientific Academic (In-depth STEM breakdown)</option>
+                    <option value="supportive">Friendly Companion (Encouraging & Casual)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button 
+                  type="submit" 
+                  class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold px-6 py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:scale-[1.01] shadow-sm"
+                >
+                  <i data-lucide="save" class="w-4 h-4"></i>
+                  <span>Save Profile Settings</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Subjects progress tracks -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="text-base font-bold text-slate-900 mb-6 flex items-center gap-2.5">
+              <i data-lucide="target" class="w-5 h-5 text-indigo-600"></i>
+              <span>Active Subject Goals</span>
+            </h3>
+            
+            <div class="space-y-5">
+              <div>
+                <div class="flex justify-between items-center text-sm mb-2">
+                  <span class="font-medium text-slate-700">Computer Science & Programming</span>
+                  <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">85% Mastery</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
+                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 85%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex justify-between items-center text-sm mb-2">
+                  <span class="font-medium text-slate-700">Mathematics & Scientific Equations</span>
+                  <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">65% Mastery</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
+                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 65%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-sm mb-2">
+                  <span class="font-medium text-slate-700">Modern Natural Sciences & Biology</span>
+                  <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">40% Mastery</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
+                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 40%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right: Milestones and Badges -->
+        <section class="space-y-6">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="text-base font-bold text-slate-900 mb-5 flex items-center gap-2.5">
+              <i data-lucide="award" class="w-5 h-5 text-indigo-600"></i>
+              <span>Earned Badges</span>
+            </h3>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 flex flex-col items-center shadow-sm">
+                <div class="p-2.5 bg-orange-100 text-orange-600 rounded-full border border-orange-200">
+                  <i data-lucide="flame" class="w-5 h-5 fill-orange-500/20"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-800 block">Day-5 Streak</span>
+                <span class="text-[10px] text-slate-400 block leading-tight">Five days in a row study routine</span>
+              </div>
+
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 flex flex-col items-center shadow-sm">
+                <div class="p-2.5 bg-indigo-100 text-indigo-600 rounded-full border border-indigo-200">
+                  <i data-lucide="code" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-800 block">Code Warrior</span>
+                <span class="text-[10px] text-slate-400 block leading-tight">Mastered Python & Recursion</span>
+              </div>
+
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 flex flex-col items-center shadow-sm">
+                <div class="p-2.5 bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 animate-pulse">
+                  <i data-lucide="calculator" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-800 block">Math Guru</span>
+                <span class="text-[10px] text-slate-400 block leading-tight">Solved complex equations with AI</span>
+              </div>
+
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 flex flex-col items-center shadow-sm">
+                <div class="p-2.5 bg-amber-100 text-amber-600 rounded-full border border-amber-200">
+                  <i data-lucide="brain" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-800 block">Socrates Pupil</span>
+                <span class="text-[10px] text-slate-400 block leading-tight">Had 10+ Socratic learning chats</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2.5">
+              <i data-lucide="clock" class="w-5 h-5 text-indigo-600"></i>
+              <span>Weekly Progress Metrics</span>
+            </h3>
+            <div class="space-y-3.5">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400">Total Study Time:</span>
+                <span class="text-slate-700 font-mono font-bold">14.5 Hours</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400">Tutor Messages Exchanged:</span>
+                <span class="text-slate-700 font-mono font-bold">64 Chats</span>
+              </div>
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400">Formulas Analyzed:</span>
+                <span class="text-slate-700 font-mono font-bold">12 Math Problems</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Elements
+    const profileForm = document.getElementById('profile-form');
+    const studentNameInput = document.getElementById('student-name');
+    const educationLevelInput = document.getElementById('education-level');
+    const subjectAreaInput = document.getElementById('subject-area');
+    const teachingPersonaInput = document.getElementById('teaching-persona');
+
+    const profileDisplayName = document.getElementById('profile-display-name');
+    const profileAvatar = document.getElementById('profile-avatar');
+
+    // Retrieve Student Profile from storage
+    let profile = JSON.parse(localStorage.getItem('smartlearn_profile')) || {
+      name: "Mogesh",
+      level: "Undergraduate",
+      targetSubject: "Computer Science",
+      persona: "socratic"
+    };
+
+    // Load values into UI
+    function loadProfileToInputs() {
+      studentNameInput.value = profile.name || "";
+      educationLevelInput.value = profile.level || "Undergraduate";
+      subjectAreaInput.value = profile.targetSubject || "";
+      teachingPersonaInput.value = profile.persona || "socratic";
+
+      profileDisplayName.innerText = profile.name || "Student";
+      profileAvatar.innerText = (profile.name || "S").charAt(0).toUpperCase();
+    }
+
+    loadProfileToInputs();
+
+    // Form Save Handler
+    profileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Gather input values
+      profile.name = studentNameInput.value.trim() || "Student";
+      profile.level = educationLevelInput.value;
+      profile.targetSubject = subjectAreaInput.value.trim() || "General Studies";
+      profile.persona = teachingPersonaInput.value;
+
+      // Persist in localStorage
+      localStorage.setItem('smartlearn_profile', JSON.stringify(profile));
+
+      // Update UI displays
+      profileDisplayName.innerText = profile.name;
+      profileAvatar.innerText = profile.name.charAt(0).toUpperCase();
+
+      alert("🎉 Profile Settings Saved Successfully! These parameters will now dictate the behavior of your Socratic/Practical AI Tutor.");
+    });
+  </script>
+</body>
+</html>
