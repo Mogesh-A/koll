@@ -70,13 +70,17 @@
         <i data-lucide="message-square" class="w-5 h-5 text-indigo-600"></i>
         <span>AI Tutor Chat</span>
       </a>
+      <a href="/Quiz.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="check-square" class="w-5 h-5 text-slate-400"></i>
+        <span>AI Study Quiz</span>
+      </a>
       <a href="/Profile.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
         <i data-lucide="user" class="w-5 h-5 text-slate-400"></i>
         <span>My Study Profile</span>
       </a>
       <a href="/Calculator.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
         <i data-lucide="calculator" class="w-5 h-5 text-slate-400"></i>
-        <span>Math Helper Calc</span>
+        <span>Helper Calcy</span>
       </a>
     </nav>
 
@@ -96,6 +100,7 @@
       </div>
       <div class="flex items-center gap-3">
         <a href="/index.html" class="p-2 text-indigo-700 bg-indigo-50 rounded-lg"><i data-lucide="message-square" class="w-5 h-5"></i></a>
+        <a href="/Quiz.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="check-square" class="w-5 h-5"></i></a>
         <a href="/Profile.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="user" class="w-5 h-5"></i></a>
         <a href="/Calculator.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="calculator" class="w-5 h-5"></i></a>
       </div>
@@ -116,15 +121,24 @@
         </div>
       </div>
 
-      <!-- Persona / Tone Selector -->
-      <div class="flex items-center gap-3">
-        <label for="persona-select" class="text-xs text-slate-500 font-medium hidden lg:inline">Teaching Persona:</label>
-        <select id="persona-select" class="bg-white border border-slate-200 text-slate-800 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm">
-          <option value="socratic">Socratic Mentor (Guidance via Questions)</option>
-          <option value="practical">Practical Developer (Direct & Coding-focused)</option>
-          <option value="science">Scientific Academic (In-depth STEM breakdown)</option>
-          <option value="supportive">Friendly Companion (Encouraging & Casual)</option>
-        </select>
+      <!-- Model & Persona Selector -->
+      <div class="flex items-center gap-2 md:gap-3 flex-wrap justify-end">
+        <div class="flex items-center gap-1.5">
+          <label for="model-select" class="text-xs text-slate-500 font-medium hidden lg:inline">AI Brain:</label>
+          <select id="model-select" class="bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm">
+            <option value="llama3" selected>🦙 Meta Llama 3</option>
+            <option value="gemini">♊ Gemini 1.5 Flash</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <label for="persona-select" class="text-xs text-slate-500 font-medium hidden lg:inline">Teaching Persona:</label>
+          <select id="persona-select" class="bg-white border border-slate-200 text-slate-800 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm font-medium">
+            <option value="socratic">Socratic Mentor (Guidance via Questions)</option>
+            <option value="practical">Practical Developer (Direct & Coding-focused)</option>
+            <option value="science">Scientific Academic (In-depth STEM breakdown)</option>
+            <option value="supportive">Friendly Companion (Encouraging & Casual)</option>
+          </select>
+        </div>
         <button id="clear-chat-btn" class="p-2 bg-white hover:bg-slate-50 hover:text-slate-800 text-slate-500 rounded-xl border border-slate-200 transition-all duration-200 shadow-sm" title="Clear Chat">
           <i data-lucide="trash-2" class="w-4 h-4"></i>
         </button>
@@ -142,7 +156,7 @@
         <div class="space-y-2">
           <div class="bg-white border border-slate-200/80 px-5 py-4 rounded-2xl rounded-tl-none shadow-sm">
             <p class="text-sm text-slate-700 leading-relaxed">
-              Hello! I'm your <strong class="text-indigo-600">SmartLearn AI Tutor</strong>. I am fully integrated with your study profile preferences and mathematical utilities.
+              Hello! I'm your <strong class="text-indigo-600">SmartLearn AI Tutor</strong>, now running on the ultra-smart <strong class="text-indigo-600">Meta Llama 3</strong> engine! I am fully integrated with your study profile preferences and mathematical utilities.
             </p>
             <p class="text-sm text-slate-600 mt-2 leading-relaxed">
               What topic are we exploring today? You can choose one of the suggestions below, ask me a question, or paste an equation directly from your helper calculator!
@@ -204,6 +218,7 @@
     const chatForm = document.getElementById('chat-form');
     const userInput = document.getElementById('user-input');
     const personaSelect = document.getElementById('persona-select');
+    const modelSelect = document.getElementById('model-select');
     const clearChatBtn = document.getElementById('clear-chat-btn');
 
     // Load / Save chat history and configurations
@@ -251,7 +266,7 @@
     }
 
     // Append Message to UI
-    function appendMessage(sender, text, time = "Just now") {
+    function appendMessage(sender, text, time = "Just now", modelUsed = "") {
       const isAI = sender === 'AI';
       const msgDiv = document.createElement('div');
       msgDiv.className = `flex gap-4 max-w-3xl ${isAI ? 'mr-auto' : 'ml-auto flex-row-reverse'} leading-relaxed animate-fade-in`;
@@ -262,13 +277,18 @@
 
       const parsedText = isAI ? parseMarkdown(text) : text;
 
+      let badgeHtml = '';
+      if (isAI && modelUsed) {
+        badgeHtml = `<span class="inline-flex items-center gap-1 px-2 py-0.5 ml-2 rounded-full text-[9px] font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono tracking-wide uppercase"><i data-lucide="cpu" class="w-2.5 h-2.5 shrink-0"></i>${modelUsed}</span>`;
+      }
+
       msgDiv.innerHTML = `
         ${avatar}
         <div class="space-y-2">
           <div class="${isAI ? 'bg-white border border-slate-200 text-slate-800' : 'bg-indigo-600 text-white font-medium'} px-5 py-4 rounded-2xl rounded-tl-none ${!isAI ? 'rounded-tr-none' : ''} shadow-sm">
             <p class="text-sm leading-relaxed">${parsedText}</p>
           </div>
-          <span class="text-[10px] text-slate-400 ${isAI ? 'ml-1' : 'mr-1 block text-right'}">${isAI ? 'AI Tutor' : studentProfile.name} • ${time}</span>
+          <span class="text-[10px] text-slate-400 ${isAI ? 'ml-1' : 'mr-1 block text-right'}">${isAI ? 'AI Tutor' : studentProfile.name}${badgeHtml} • ${time}</span>
         </div>
       `;
 
@@ -290,7 +310,7 @@
             <div class="space-y-2">
               <div class="bg-white border border-slate-200/80 px-5 py-4 rounded-2xl rounded-tl-none shadow-sm">
                 <p class="text-sm text-slate-700 leading-relaxed">
-                  Hello! I'm your <strong class="text-indigo-600">SmartLearn AI Tutor</strong>. I am fully integrated with your study profile preferences and mathematical utilities.
+                  Hello! I'm your <strong class="text-indigo-600">SmartLearn AI Tutor</strong>, now running on the ultra-smart <strong class="text-indigo-600">Meta Llama 3</strong> engine! I am fully integrated with your study profile preferences and mathematical utilities.
                 </p>
                 <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                   What topic are we exploring today? You can choose one of the suggestions below, ask me a question, or paste an equation directly from your helper calculator!
@@ -307,7 +327,7 @@
 
       chatHistory.forEach(msg => {
         const timeStr = new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        appendMessage(msg.sender, msg.text, timeStr);
+        appendMessage(msg.sender, msg.text, timeStr, msg.modelUsed || "");
       });
     }
 
@@ -332,6 +352,7 @@
         subjectArea: studentProfile.targetSubject,
         teachingPersona: personaSelect.value,
         message: text,
+        model: modelSelect.value,
         chatHistory: chatHistory.map(h => ({
           role: h.sender === 'User' ? 'user' : 'model',
           message: h.text
@@ -390,9 +411,10 @@
 
         // Append AI response
         const aiResponseText = data.response || "I had trouble generating a response. Please try again!";
-        appendMessage('AI', aiResponseText, new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+        const modelUsed = data.modelUsed || "";
+        appendMessage('AI', aiResponseText, new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), modelUsed);
         
-        chatHistory.push({ sender: 'AI', text: aiResponseText, timestamp: new Date().toISOString() });
+        chatHistory.push({ sender: 'AI', text: aiResponseText, timestamp: new Date().toISOString(), modelUsed: modelUsed });
         localStorage.setItem('smartlearn_chat_history', JSON.stringify(chatHistory));
 
       } catch (error) {

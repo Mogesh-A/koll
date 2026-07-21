@@ -1,6 +1,6 @@
 {
   "name": "SmartLearn AI Tutor",
-  "description": "An interactive, personalized AI Tutor application with Profile and scientific Calculator integrations, backed by a Spring Boot-style REST API architecture.",
+  "description": "An interactive, personalized AI Tutor application powered by Meta Llama 3, featuring profile customization, dynamic interactive quizzes, and scientific calculator integrations.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

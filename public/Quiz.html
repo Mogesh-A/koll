@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartLearn AI Tutor - AI Quiz Room</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            indigo: {
+              50: '#f0fdfa',   // teal-50
+              100: '#ccfbf1',  // teal-100
+              200: '#99f6e4',  // teal-200
+              300: '#5eead4',  // teal-300
+              400: '#2dd4bf',  // teal-400
+              500: '#14b8a6',  // teal-500
+              600: '#0d9488',  // teal-600
+              700: '#0f766e',  // teal-700
+              800: '#115e59',  // teal-800
+              900: '#134e4a',  // teal-900
+              950: '#042f2e',  // teal-950
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="flex h-full font-sans antialiased overflow-hidden bg-slate-50 text-slate-900">
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 shrink-0">
+    <div class="p-6 flex items-center gap-3 border-b border-slate-100">
+      <div class="p-2.5 bg-indigo-600 text-white rounded-xl shadow-sm">
+        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight tracking-tight text-slate-900">SmartLearn</h1>
+        <span class="text-xs font-semibold text-indigo-600 tracking-wider uppercase">AI Companion</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 p-4 space-y-1 bg-white">
+      <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Project Workspace</div>
+      <a href="/index.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="message-square" class="w-5 h-5 text-slate-400"></i>
+        <span>AI Tutor Chat</span>
+      </a>
+      <a href="/Quiz.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-indigo-700 bg-indigo-50 rounded-xl transition-all duration-200">
+        <i data-lucide="check-square" class="w-5 h-5 text-indigo-600"></i>
+        <span>AI Study Quiz</span>
+      </a>
+      <a href="/Profile.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="user" class="w-5 h-5 text-slate-400"></i>
+        <span>My Study Profile</span>
+      </a>
+      <a href="/Calculator.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="calculator" class="w-5 h-5 text-slate-400"></i>
+        <span>Helper Calcy</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col min-w-0 bg-slate-50 h-full relative overflow-y-auto">
+
+    <!-- Mobile Top Header -->
+    <header class="flex md:hidden items-center justify-between p-4 bg-white border-b border-slate-200">
+      <div class="flex items-center gap-2">
+        <div class="p-2 bg-indigo-600 text-white rounded-lg">
+          <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        </div>
+        <h1 class="font-bold text-base text-slate-900">SmartLearn</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/index.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="message-square" class="w-5 h-5"></i></a>
+        <a href="/Quiz.html" class="p-2 text-indigo-700 bg-indigo-50 rounded-lg"><i data-lucide="check-square" class="w-5 h-5"></i></a>
+        <a href="/Profile.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="user" class="w-5 h-5"></i></a>
+        <a href="/Calculator.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="calculator" class="w-5 h-5"></i></a>
+      </div>
+    </header>
+
+    <!-- Title Header -->
+    <header class="p-6 md:p-8 border-b border-slate-200 bg-white">
+      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="p-3 bg-indigo-50 text-indigo-600 rounded-2xl border border-indigo-100 shadow-sm">
+            <i data-lucide="check-square" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h1 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">AI Quiz Room</h1>
+            <p class="text-xs text-slate-500 mt-0.5">Test your comprehension on topics you study with instant feedback</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Body Container -->
+    <div class="p-6 md:p-8 max-w-3xl mx-auto w-full">
+
+      <!-- Configuration Card / Launcher -->
+      <section id="quiz-setup" class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="brain" class="w-5 h-5 text-indigo-600"></i>
+            <span>Configure Your AI Study Quiz</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">Our AI creates custom multiple choice questions to solidify your active recall.</p>
+        </div>
+
+        <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-2xl flex gap-3.5 items-start">
+          <div class="p-1.5 bg-indigo-600 text-white rounded-lg mt-0.5 shadow-sm">
+            <i data-lucide="user" class="w-4 h-4"></i>
+          </div>
+          <div class="text-xs space-y-1 text-indigo-950">
+            <p class="font-bold">Active Study Profile:</p>
+            <p>Student Name: <strong id="profile-name-span" class="text-indigo-600 font-bold">Mogesh</strong></p>
+            <p>Education Level: <strong id="profile-level-span" class="text-indigo-600 font-bold">Undergraduate</strong></p>
+            <p>Primary Subject: <strong id="profile-subject-span" class="text-indigo-600 font-bold">Computer Science</strong></p>
+          </div>
+        </div>
+
+        <form id="quiz-generate-form" class="space-y-4">
+          <div class="space-y-1.5">
+            <label for="quiz-topic-input" class="text-xs font-bold text-slate-700">Specific Quiz Topic or Subtopic:</label>
+            <div class="relative flex items-center">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4"></i>
+              <input 
+                type="text" 
+                id="quiz-topic-input" 
+                placeholder="e.g. Data Structures, Cell Division, Quantum Physics, Calculus..." 
+                class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm"
+                required
+              >
+            </div>
+            <p class="text-[10px] text-slate-400">Specify exactly what you want to be quizzed on. AI will formulate questions tailored specifically to this subtopic.</p>
+          </div>
+
+          <!-- Quick presets based on what they studied -->
+          <div class="space-y-2">
+            <span class="text-xs font-semibold text-slate-600 block">Or select a trending topic:</span>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="presetTopic('Data Structures & Algorithms')" class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-sm">
+                💻 Algorithms
+              </button>
+              <button type="button" onclick="presetTopic('Organic Chemistry Basics')" class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-sm">
+                🧪 Organic Chemistry
+              </button>
+              <button type="button" onclick="presetTopic('Limits & Derivatives')" class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-sm">
+                📐 Limits & Derivatives
+              </button>
+              <button type="button" onclick="presetTopic('World War II History')" class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-sm">
+                🌍 WWII History
+              </button>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              id="start-quiz-btn"
+              class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2 text-sm"
+            >
+              <i data-lucide="play" class="w-4 h-4"></i>
+              <span>Generate AI Quiz</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Loading State -->
+      <section id="quiz-loading" class="hidden bg-white border border-slate-200 rounded-3xl p-12 text-center shadow-sm space-y-4">
+        <div class="flex items-center justify-center">
+          <div class="relative flex h-12 w-12 items-center justify-center">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-8 w-8 bg-indigo-600 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <h3 class="font-bold text-slate-800 text-base">Creating Interactive Assessment...</h3>
+          <p class="text-xs text-slate-500 max-w-sm mx-auto">SmartLearn AI is reading your academic settings and dynamically compiling 5 robust questions with answers and explanations.</p>
+        </div>
+      </section>
+
+      <!-- Active Quiz Card -->
+      <section id="quiz-container" class="hidden space-y-6">
+        
+        <!-- Header / Progress Bar -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 id="quiz-active-title" class="text-sm font-bold text-slate-900">Quiz</h3>
+              <p id="quiz-active-topic" class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Subject</p>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <span class="text-xs font-mono font-bold text-indigo-600" id="quiz-progress-text">Question 1 of 5</span>
+            <div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden mt-1 border border-slate-200/60">
+              <div id="quiz-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-300" style="width: 20%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview mode alert if applicable -->
+        <div id="preview-banner" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 flex gap-3 items-start">
+          <div class="p-1 bg-amber-100 text-amber-700 rounded">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+          </div>
+          <div class="text-xs text-amber-800">
+            <p class="font-bold">AI Studio Preview Mode</p>
+            <p class="mt-0.5">The <code class="bg-amber-100 px-1 py-0.5 rounded font-mono">GEMINI_API_KEY</code> is not configured yet. Showing a high-quality study companion quiz. Configure your API Key to generate real-time AI quizzes on any topic!</p>
+          </div>
+        </div>
+
+        <!-- Question Display Card -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+          <div class="space-y-2">
+            <span class="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider block">Question</span>
+            <h2 id="question-text" class="text-base sm:text-lg font-bold text-slate-800 leading-snug">What is the output of the following python code block?</h2>
+          </div>
+
+          <!-- Options Stack -->
+          <div id="options-stack" class="grid grid-cols-1 gap-3">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Feedback Box -->
+          <div id="feedback-box" class="hidden p-5 rounded-2xl border transition-all duration-200 flex gap-3.5 items-start">
+            <div id="feedback-icon-container" class="p-1.5 text-white rounded-xl shadow-sm">
+              <!-- Lucide icon injected -->
+            </div>
+            <div class="text-xs space-y-1">
+              <p id="feedback-status" class="font-bold"></p>
+              <p id="feedback-explanation" class="text-slate-600 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="flex justify-end pt-2">
+            <button 
+              id="next-question-btn" 
+              onclick="nextQuestion()"
+              class="hidden bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-5 rounded-xl text-xs transition-all flex items-center gap-1.5 shadow-md"
+            >
+              <span>Next Question</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <button 
+              id="finish-quiz-btn" 
+              onclick="finishQuiz()"
+              class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-5 rounded-xl text-xs transition-all flex items-center gap-1.5 shadow-md"
+            >
+              <span>Complete Assessment</span>
+              <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scoreboard Summary Card -->
+      <section id="quiz-summary" class="hidden bg-white border border-slate-200 rounded-3xl p-8 text-center shadow-sm space-y-8 animate-fade-in">
+        <div class="space-y-4">
+          <div class="inline-flex p-4 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-full animate-bounce">
+            <i data-lucide="trophy" class="w-10 h-10"></i>
+          </div>
+          <div class="space-y-1.5">
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Quiz Assessment Complete!</h2>
+            <p class="text-xs text-slate-500">Here are your study mastery metrics on this topic.</p>
+          </div>
+        </div>
+
+        <!-- Scores Grid -->
+        <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl shadow-sm">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Correct Answers</span>
+            <p class="text-2xl md:text-3xl font-black text-slate-800 mt-1 font-mono" id="score-text">4 / 5</p>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl shadow-sm">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Estimated Mastery</span>
+            <p class="text-2xl md:text-3xl font-black text-indigo-600 mt-1 font-mono" id="mastery-percentage">80%</p>
+          </div>
+        </div>
+
+        <!-- Mastery rating description -->
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl max-w-md mx-auto text-xs text-slate-600 leading-relaxed text-left">
+          <p class="font-bold text-slate-800 mb-1" id="mastery-header">Exceptional Performance!</p>
+          <p id="mastery-feedback">You have demonstrated highly robust mental models of this subject area. Retaining these structures will make future deep-dives much smoother.</p>
+        </div>
+
+        <!-- Buttons Stack -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-sm mx-auto pt-4">
+          <button 
+            onclick="restartSetup()"
+            class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-1.5"
+          >
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Try Another Topic</span>
+          </button>
+          <a 
+            href="/index.html"
+            class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-semibold py-3 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center justify-center gap-1.5"
+          >
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+            <span>Back to AI Tutor</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Data elements
+    let currentQuiz = null;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answeredQuestions = {};
+
+    // DOM Elements
+    const profileNameSpan = document.getElementById('profile-name-span');
+    const profileLevelSpan = document.getElementById('profile-level-span');
+    const profileSubjectSpan = document.getElementById('profile-subject-span');
+    const quizTopicInput = document.getElementById('quiz-topic-input');
+
+    const setupSection = document.getElementById('quiz-setup');
+    const loadingSection = document.getElementById('quiz-loading');
+    const quizSection = document.getElementById('quiz-container');
+    const summarySection = document.getElementById('quiz-summary');
+
+    const activeTitle = document.getElementById('quiz-active-title');
+    const activeTopic = document.getElementById('quiz-active-topic');
+    const previewBanner = document.getElementById('preview-banner');
+    const progressText = document.getElementById('quiz-progress-text');
+    const progressBar = document.getElementById('quiz-progress-bar');
+
+    const questionText = document.getElementById('question-text');
+    const optionsStack = document.getElementById('options-stack');
+    const feedbackBox = document.getElementById('feedback-box');
+    const feedbackIconContainer = document.getElementById('feedback-icon-container');
+    const feedbackStatus = document.getElementById('feedback-status');
+    const feedbackExplanation = document.getElementById('feedback-explanation');
+
+    const nextQuestionBtn = document.getElementById('next-question-btn');
+    const finishQuizBtn = document.getElementById('finish-quiz-btn');
+
+    const scoreText = document.getElementById('score-text');
+    const masteryPercentage = document.getElementById('mastery-percentage');
+    const masteryHeader = document.getElementById('mastery-header');
+    const masteryFeedback = document.getElementById('mastery-feedback');
+
+    // Load active study profile from localStorage
+    const profile = JSON.parse(localStorage.getItem('smartlearn_profile')) || {
+      name: "Mogesh",
+      level: "Undergraduate",
+      targetSubject: "Computer Science",
+      persona: "socratic"
+    };
+
+    profileNameSpan.textContent = profile.name || "Student";
+    profileLevelSpan.textContent = profile.level || "Undergraduate";
+    profileSubjectSpan.textContent = profile.targetSubject || "General Studies";
+    quizTopicInput.value = profile.targetSubject || "";
+
+    function presetTopic(topicName) {
+      quizTopicInput.value = topicName;
+    }
+
+    // Submit handler to fetch dynamic AI Quiz
+    document.getElementById('quiz-generate-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const chosenTopic = quizTopicInput.value.trim();
+      if (!chosenTopic) return;
+
+      // Show loading transition
+      setupSection.classList.add('hidden');
+      loadingSection.classList.remove('hidden');
+
+      try {
+        const response = await fetch('/api/quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            educationLevel: profile.level,
+            subjectArea: profile.targetSubject,
+            topic: chosenTopic
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to load custom quiz options.");
+        }
+
+        currentQuiz = await response.json();
+        startQuiz();
+
+      } catch (err) {
+        console.error("Error creating quiz:", err);
+        alert("⚠️ Something went wrong compiling the AI Quiz questions. Please check server logs and try again.");
+        loadingSection.classList.add('hidden');
+        setupSection.classList.remove('hidden');
+      }
+    });
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      answeredQuestions = {};
+
+      loadingSection.classList.add('hidden');
+      quizSection.classList.remove('hidden');
+
+      activeTitle.textContent = currentQuiz.title || 'Dynamic Study Quiz';
+      activeTopic.textContent = currentQuiz.topic || 'Assessment';
+
+      if (currentQuiz.isFallback) {
+        previewBanner.classList.remove('hidden');
+      } else {
+        previewBanner.classList.add('hidden');
+      }
+
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      feedbackBox.classList.add('hidden');
+      nextQuestionBtn.classList.add('hidden');
+      finishQuizBtn.classList.add('hidden');
+
+      const question = currentQuiz.questions[currentQuestionIndex];
+      questionText.textContent = question.question;
+
+      // Render options
+      optionsStack.innerHTML = '';
+      question.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.id = `opt-btn-${idx}`;
+        btn.type = 'button';
+        btn.onclick = () => selectOption(idx);
+        btn.className = "w-full text-left p-4 bg-slate-50 hover:bg-slate-100 border border-slate-200/85 rounded-xl text-xs font-semibold text-slate-700 transition-all duration-200 shadow-sm flex justify-between items-center group";
+        
+        btn.innerHTML = `
+          <span>${opt}</span>
+          <div id="opt-icon-holder-${idx}" class="w-5 h-5 rounded-full border border-slate-300 bg-white group-hover:border-indigo-400 shrink-0"></div>
+        `;
+        optionsStack.appendChild(btn);
+      });
+
+      // Update progress metrics
+      const total = currentQuiz.questions.length;
+      progressText.textContent = `Question ${currentQuestionIndex + 1} of ${total}`;
+      progressBar.style.width = `${((currentQuestionIndex + 1) / total) * 100}%`;
+    }
+
+    function selectOption(selectedIndex) {
+      // Prevent multiple clicks on the same question
+      if (answeredQuestions[currentQuestionIndex] !== undefined) return;
+
+      const question = currentQuiz.questions[currentQuestionIndex];
+      const correctIdx = question.correctAnswer;
+      answeredQuestions[currentQuestionIndex] = selectedIndex;
+
+      const total = currentQuiz.questions.length;
+
+      // Highlight options
+      question.options.forEach((_, idx) => {
+        const btn = document.getElementById(`opt-btn-${idx}`);
+        const iconHolder = document.getElementById(`opt-icon-holder-${idx}`);
+
+        // Remove click actions and disable hover styling
+        btn.onclick = null;
+        btn.classList.remove('hover:bg-slate-100', 'bg-slate-50', 'text-slate-700');
+
+        if (idx === correctIdx) {
+          // Highlight correct option in green
+          btn.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-900');
+          iconHolder.className = "w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm";
+          iconHolder.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i>`;
+        } else if (idx === selectedIndex) {
+          // Highlight incorrect option in red
+          btn.classList.add('bg-rose-50', 'border-rose-300', 'text-rose-900');
+          iconHolder.className = "w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center shrink-0 shadow-sm";
+          iconHolder.innerHTML = `<i data-lucide="x" class="w-3.5 h-3.5"></i>`;
+        } else {
+          btn.classList.add('bg-slate-50/50', 'opacity-65', 'text-slate-400');
+          iconHolder.className = "w-5 h-5 rounded-full border border-slate-200 bg-slate-50/50 shrink-0";
+        }
+      });
+
+      // Track scores
+      if (selectedIndex === correctIdx) {
+        score++;
+        feedbackBox.className = "p-5 rounded-2xl border bg-emerald-50/50 border-emerald-200 flex gap-3.5 items-start animate-fade-in";
+        feedbackIconContainer.className = "p-1.5 bg-emerald-500 text-white rounded-xl shadow-sm";
+        feedbackIconContainer.innerHTML = `<i data-lucide="check-circle-2" class="w-5 h-5"></i>`;
+        feedbackStatus.className = "font-bold text-emerald-900";
+        feedbackStatus.textContent = "Correct Answer! Fantastic thinking.";
+      } else {
+        feedbackBox.className = "p-5 rounded-2xl border bg-rose-50/50 border-rose-200 flex gap-3.5 items-start animate-fade-in";
+        feedbackIconContainer.className = "p-1.5 bg-rose-500 text-white rounded-xl shadow-sm";
+        feedbackIconContainer.innerHTML = `<i data-lucide="alert-circle" class="w-5 h-5"></i>`;
+        feedbackStatus.className = "font-bold text-rose-900";
+        feedbackStatus.textContent = `Incorrect. The correct answer was option ${correctIdx + 1}.`;
+      }
+
+      feedbackExplanation.textContent = question.explanation;
+      feedbackBox.classList.remove('hidden');
+
+      lucide.createIcons();
+
+      // Show next navigation
+      if (currentQuestionIndex + 1 < total) {
+        nextQuestionBtn.classList.remove('hidden');
+      } else {
+        finishQuizBtn.classList.remove('hidden');
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      renderQuestion();
+    }
+
+    function finishQuiz() {
+      quizSection.classList.add('hidden');
+      summarySection.classList.remove('hidden');
+
+      const total = currentQuiz.questions.length;
+      const percentage = Math.round((score / total) * 100);
+
+      scoreText.textContent = `${score} / ${total}`;
+      masteryPercentage.textContent = `${percentage}%`;
+
+      // Custom feedback based on score
+      if (percentage === 100) {
+        masteryHeader.textContent = "🏆 Perfect Score! Stellar Mastery.";
+        masteryHeader.className = "font-bold text-emerald-800 mb-1";
+        masteryFeedback.textContent = "You have shown absolutely pristine retention of this subject material. Your theoretical and application frameworks are fully aligned!";
+      } else if (percentage >= 80) {
+        masteryHeader.textContent = "🏅 Exceptional Performance!";
+        masteryHeader.className = "font-bold text-indigo-800 mb-1";
+        masteryFeedback.textContent = "Fantastic score! You have formulated highly solid mental models of this subject, only requiring minor adjustments to handle edge-cases.";
+      } else if (percentage >= 60) {
+        masteryHeader.textContent = "👍 Good Understanding!";
+        masteryHeader.className = "font-bold text-slate-800 mb-1";
+        masteryFeedback.textContent = "You've got the essential framework down. Try reviewing the explanations for the items you missed to build absolute confidence.";
+      } else {
+        masteryHeader.textContent = "📚 Foundations to Solidify!";
+        masteryHeader.className = "font-bold text-amber-800 mb-1";
+        masteryFeedback.textContent = "Excellent effort! Take a moment to chat with the AI Tutor on these exact question topics to strengthen your conceptual foundation.";
+      }
+    }
+
+    function restartSetup() {
+      summarySection.classList.add('hidden');
+      setupSection.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
