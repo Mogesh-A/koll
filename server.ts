@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
 
@@ -7,12 +8,21 @@ import { GoogleGenAI } from '@google/genai';
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Serve static frontend files
-app.use(express.static(path.join(process.cwd(), 'public')));
+// Serve static frontend files from public, dist, and root
+const publicDir = path.join(process.cwd(), 'public');
+const distDir = path.join(process.cwd(), 'dist');
+
+if (fs.existsSync(publicDir)) {
+  app.use(express.static(publicDir));
+}
+if (fs.existsSync(distDir)) {
+  app.use(express.static(distDir));
+}
+app.use(express.static(process.cwd()));
 
 // Initialize Gemini client (server-side only)
 const apiKey = process.env.GEMINI_API_KEY;
@@ -366,28 +376,33 @@ Ensure the output is 100% valid JSON and does not contain any wrapping codeblock
   }
 });
 
+// Helper to serve HTML files reliably across environments
+function serveHtmlFile(filename: string, res: express.Response) {
+  const fileInPublic = path.join(publicDir, filename);
+  if (fs.existsSync(fileInPublic)) {
+    return res.sendFile(fileInPublic);
+  }
+  const fileInDist = path.join(distDir, filename);
+  if (fs.existsSync(fileInDist)) {
+    return res.sendFile(fileInDist);
+  }
+  const fileInRoot = path.join(process.cwd(), filename);
+  if (fs.existsSync(fileInRoot)) {
+    return res.sendFile(fileInRoot);
+  }
+  return res.status(404).send('Page not found');
+}
+
 // Serve static HTML files directly on routing
-app.get('/index.html', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
-});
+app.get('/', (req, res) => serveHtmlFile('index.html', res));
+app.get('/index.html', (req, res) => serveHtmlFile('index.html', res));
+app.get('/Profile.html', (req, res) => serveHtmlFile('Profile.html', res));
+app.get('/Calculator.html', (req, res) => serveHtmlFile('Calculator.html', res));
+app.get('/Quiz.html', (req, res) => serveHtmlFile('Quiz.html', res));
 
-app.get('/Profile.html', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'Profile.html'));
-});
+// Default fallback route
+app.get('*', (req, res) => serveHtmlFile('index.html', res));
 
-app.get('/Calculator.html', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'Calculator.html'));
-});
-
-app.get('/Quiz.html', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'Quiz.html'));
-});
-
-// Default route redirecting to index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
-});
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`SmartLearn Full-Stack Node Dev Server running on http://0.0.0.0:${PORT}`);
+app.listen(Number(PORT), '0.0.0.0', () => {
+  console.log(`SmartLearn Full-Stack Node Server running on http://0.0.0.0:${PORT}`);
 });

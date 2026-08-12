@@ -1,13 +1,472 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-900">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartLearn AI Tutor</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            indigo: {
+              50: '#f0fdfa',   // teal-50
+              100: '#ccfbf1',  // teal-100
+              200: '#99f6e4',  // teal-200
+              300: '#5eead4',  // teal-300
+              400: '#2dd4bf',  // teal-400
+              500: '#14b8a6',  // teal-500
+              600: '#0d9488',  // teal-600
+              700: '#0f766e',  // teal-700
+              800: '#115e59',  // teal-800
+              900: '#134e4a',  // teal-900
+              950: '#042f2e',  // teal-950
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="flex h-full font-sans antialiased overflow-hidden bg-slate-50 text-slate-900">
 
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 shrink-0">
+    <div class="p-6 flex items-center gap-3 border-b border-slate-100">
+      <div class="p-2.5 bg-indigo-600 text-white rounded-xl shadow-sm">
+        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg leading-tight tracking-tight text-slate-900">SmartLearn</h1>
+        <span class="text-xs font-semibold text-indigo-600 tracking-wider uppercase">AI Companion</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 p-4 space-y-1 bg-white">
+      <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Project Workspace</div>
+      <a href="/index.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-indigo-700 bg-indigo-50 rounded-xl transition-all duration-200">
+        <i data-lucide="message-square" class="w-5 h-5 text-indigo-600"></i>
+        <span>AI Tutor Chat</span>
+      </a>
+      <a href="/Quiz.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="check-square" class="w-5 h-5 text-slate-400"></i>
+        <span>AI Study Quiz</span>
+      </a>
+      <a href="/Profile.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="user" class="w-5 h-5 text-slate-400"></i>
+        <span>My Study Profile</span>
+      </a>
+      <a href="/Calculator.html" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-200">
+        <i data-lucide="calculator" class="w-5 h-5 text-slate-400"></i>
+        <span>Helper Calcy</span>
+      </a>
+    </nav>
+
+
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col min-w-0 bg-slate-50 h-full relative">
+
+    <!-- Mobile Top Header -->
+    <header class="flex md:hidden items-center justify-between p-4 bg-white border-b border-slate-200">
+      <div class="flex items-center gap-2">
+        <div class="p-2 bg-indigo-600 text-white rounded-lg">
+          <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        </div>
+        <h1 class="font-bold text-base text-slate-900">SmartLearn</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/index.html" class="p-2 text-indigo-700 bg-indigo-50 rounded-lg"><i data-lucide="message-square" class="w-5 h-5"></i></a>
+        <a href="/Quiz.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="check-square" class="w-5 h-5"></i></a>
+        <a href="/Profile.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="user" class="w-5 h-5"></i></a>
+        <a href="/Calculator.html" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"><i data-lucide="calculator" class="w-5 h-5"></i></a>
+      </div>
+    </header>
+
+    <!-- Top Chat Header & Persona Selector -->
+    <header class="flex items-center justify-between p-4 md:p-6 bg-white border-b border-slate-200/80 backdrop-blur-md shadow-sm">
+      <div class="flex items-center gap-4">
+        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-2xl border border-indigo-100 hidden sm:block shadow-sm">
+          <i data-lucide="bot" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="font-semibold text-base sm:text-lg text-slate-900">SmartLearn AI Tutor</h2>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="inline-block w-2 h-2 rounded-full bg-indigo-600"></span>
+            <span class="text-xs text-slate-500">Personalized Learning Companion</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model & Persona Selector -->
+      <div class="flex items-center gap-2 md:gap-3 flex-wrap justify-end">
+        <div class="flex items-center gap-1.5">
+          <label for="model-select" class="text-xs text-slate-500 font-medium hidden lg:inline">AI Brain:</label>
+          <select id="model-select" class="bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm">
+            <option value="llama3" selected>🦙 Meta Llama 3</option>
+            <option value="gemini">♊ Gemini 1.5 Flash</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <label for="persona-select" class="text-xs text-slate-500 font-medium hidden lg:inline">Teaching Persona:</label>
+          <select id="persona-select" class="bg-white border border-slate-200 text-slate-800 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm font-medium">
+            <option value="socratic">Socratic Mentor (Guidance via Questions)</option>
+            <option value="practical">Practical Developer (Direct & Coding-focused)</option>
+            <option value="science">Scientific Academic (In-depth STEM breakdown)</option>
+            <option value="supportive">Friendly Companion (Encouraging & Casual)</option>
+          </select>
+        </div>
+        <button id="clear-chat-btn" class="p-2 bg-white hover:bg-slate-50 hover:text-slate-800 text-slate-500 rounded-xl border border-slate-200 transition-all duration-200 shadow-sm" title="Clear Chat">
+          <i data-lucide="trash-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Messages Container -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 bg-slate-50">
+      
+      <!-- Welcome Message -->
+      <div class="flex gap-4 max-w-3xl mr-auto leading-relaxed animate-fade-in">
+        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100 shadow-sm">
+          <i data-lucide="bot" class="w-4 h-4"></i>
+        </div>
+        <div class="space-y-2">
+          <div class="bg-white border border-slate-200/80 px-5 py-4 rounded-2xl rounded-tl-none shadow-sm">
+            <p class="text-sm text-slate-700 leading-relaxed">
+              Hello! I'm your <strong class="text-indigo-600">SmartLearn AI Tutor</strong>, now running on the ultra-smart <strong class="text-indigo-600">Meta Llama 3</strong> engine! I am fully integrated with your study profile preferences and mathematical utilities.
+            </p>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+              What topic are we exploring today? You can choose one of the suggestions below, ask me a question, or paste an equation directly from your helper calculator!
+            </p>
+          </div>
+          <span class="text-[10px] text-slate-400 ml-1">AI Tutor • Just now</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Suggestions Ribbon -->
+    <div class="px-4 md:px-6 py-2 bg-white border-t border-slate-200/60 overflow-x-auto whitespace-nowrap flex gap-2 no-scrollbar scroll-smooth">
+      <button onclick="applySuggestion('Explain the Socratic method of learning')" class="text-xs bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-3.5 py-2 rounded-xl transition-all shrink-0 shadow-sm">
+        🎓 Socratic Method
+      </button>
+      <button onclick="applySuggestion('Give me a quick 3-question quiz on Basic Biology')" class="text-xs bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-3.5 py-2 rounded-xl transition-all shrink-0 shadow-sm">
+        🔬 Quick Biology Quiz
+      </button>
+      <button onclick="applySuggestion('Help me write a recursive function to calculate factorials in Python')" class="text-xs bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-3.5 py-2 rounded-xl transition-all shrink-0 shadow-sm">
+        🐍 Recursion in Python
+      </button>
+      <button onclick="applySuggestion('Give me a simple memory trick to remember the periodic table')" class="text-xs bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-3.5 py-2 rounded-xl transition-all shrink-0 shadow-sm">
+        🧠 Memory Trick
+      </button>
+    </div>
+
+    <!-- Input Box Area -->
+    <footer class="p-4 md:p-6 bg-white border-t border-slate-200">
+      <form id="chat-form" class="max-w-4xl mx-auto flex gap-3 relative">
+        <div class="flex-1 relative flex items-center bg-white border border-slate-200 rounded-2xl focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 overflow-hidden transition-all duration-200 shadow-sm">
+          <input 
+            type="text" 
+            id="user-input" 
+            placeholder="Ask your tutor anything..." 
+            autocomplete="off"
+            class="flex-1 bg-transparent border-0 px-5 py-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0"
+          />
+        </div>
+        <button 
+          type="submit" 
+          id="send-btn" 
+          class="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold px-5 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:scale-[1.02] shadow-sm"
+        >
+          <span>Send</span>
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+      <div class="text-center mt-3">
+        <p class="text-[10px] text-slate-400">Connected to Express REST API: <span class="text-slate-500 font-mono">POST /api/tutor</span>. All settings sync with your Study Profile.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Global Elements
+    const chatMessages = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const personaSelect = document.getElementById('persona-select');
+    const modelSelect = document.getElementById('model-select');
+    const clearChatBtn = document.getElementById('clear-chat-btn');
+
+    // Load / Save chat history and configurations
+    let chatHistory = JSON.parse(localStorage.getItem('smartlearn_chat_history')) || [];
+    let studentProfile = JSON.parse(localStorage.getItem('smartlearn_profile')) || {
+      name: "Mogesh",
+      level: "Intermediate",
+      targetSubject: "Computer Science",
+      persona: "socratic"
+    };
+
+    // Set persona dropdown matching profile/stored choice
+    if (studentProfile.persona) {
+      personaSelect.value = studentProfile.persona;
+    }
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Markdown Parser (Vanilla Simple Regex to render beautifully in static HTML)
+    function parseMarkdown(text) {
+      if (!text) return "";
+      let html = text
+        // Escape HTML
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        // Code Blocks ```lang ... ```
+        .replace(/```([\s\S]+?)```/g, '<pre class="bg-slate-900 border border-slate-200/80 p-4 rounded-xl font-mono text-xs text-slate-200 overflow-x-auto my-3"><code class="block">$1</code></pre>')
+        // Inline Code `...`
+        .replace(/`([^`]+)`/g, '<code class="bg-slate-100 text-indigo-600 px-1.5 py-0.5 rounded font-mono text-xs font-semibold">$1</code>')
+        // Bold **...**
+        .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-slate-900 font-bold">$1</strong>')
+        // Italic *...*
+        .replace(/\*([^*]+)\*/g, '<em class="text-slate-600 italic">$1</em>')
+        // Headers ### ...
+        .replace(/^### (.*$)/gim, '<h4 class="text-indigo-600 font-semibold text-sm mt-4 mb-1">$1</h4>')
+        .replace(/^## (.*$)/gim, '<h3 class="text-indigo-700 font-bold text-base mt-5 mb-2">$1</h3>')
+        .replace(/^# (.*$)/gim, '<h2 class="text-slate-900 font-extrabold text-lg mt-6 mb-3">$1</h2>')
+        // Bullet Lists
+        .replace(/^\s*-\s+(.*$)/gim, '<li class="list-disc ml-5 text-slate-700 my-1">$1</li>');
+
+      // Handle split newlines inside messages nicely
+      return html.split('\n').join('<br>');
+    }
+
+    // Append Message to UI
+    function appendMessage(sender, text, time = "Just now", modelUsed = "") {
+      const isAI = sender === 'AI';
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `flex gap-4 max-w-3xl ${isAI ? 'mr-auto' : 'ml-auto flex-row-reverse'} leading-relaxed animate-fade-in`;
+
+      const avatar = isAI 
+        ? `<div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100 shadow-sm"><i data-lucide="bot" class="w-4 h-4"></i></div>`
+        : `<div class="w-8 h-8 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center shrink-0 border border-slate-300 shadow-sm"><i data-lucide="user" class="w-4 h-4"></i></div>`;
+
+      const parsedText = isAI ? parseMarkdown(text) : text;
+
+      let badgeHtml = '';
+      if (isAI && modelUsed) {
+        badgeHtml = `<span class="inline-flex items-center gap-1 px-2 py-0.5 ml-2 rounded-full text-[9px] font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono tracking-wide uppercase"><i data-lucide="cpu" class="w-2.5 h-2.5 shrink-0"></i>${modelUsed}</span>`;
+      }
+
+      msgDiv.innerHTML = `
+        ${avatar}
+        <div class="space-y-2">
+          <div class="${isAI ? 'bg-white border border-slate-200 text-slate-800' : 'bg-indigo-600 text-white font-medium'} px-5 py-4 rounded-2xl rounded-tl-none ${!isAI ? 'rounded-tr-none' : ''} shadow-sm">
+            <p class="text-sm leading-relaxed">${parsedText}</p>
+          </div>
+          <span class="text-[10px] text-slate-400 ${isAI ? 'ml-1' : 'mr-1 block text-right'}">${isAI ? 'AI Tutor' : studentProfile.name}${badgeHtml} • ${time}</span>
+        </div>
+      `;
+
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      lucide.createIcons();
+    }
+
+    // Render Chat History
+    function renderHistory() {
+      chatMessages.innerHTML = '';
+      if (chatHistory.length === 0) {
+        // Welcome default message
+        const welcomeHtml = `
+          <div class="flex gap-4 max-w-3xl mr-auto leading-relaxed">
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100 shadow-sm">
+              <i data-lucide="bot" class="w-4 h-4"></i>
+            </div>
+            <div class="space-y-2">
+              <div class="bg-white border border-slate-200/80 px-5 py-4 rounded-2xl rounded-tl-none shadow-sm">
+                <p class="text-sm text-slate-700 leading-relaxed">
+                  Hello! I'm your <strong class="text-indigo-600">SmartLearn AI Tutor</strong>, now running on the ultra-smart <strong class="text-indigo-600">Meta Llama 3</strong> engine! I am fully integrated with your study profile preferences and mathematical utilities.
+                </p>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                  What topic are we exploring today? You can choose one of the suggestions below, ask me a question, or paste an equation directly from your helper calculator!
+                </p>
+              </div>
+              <span class="text-[10px] text-slate-400 ml-1">AI Tutor • Just now</span>
+            </div>
+          </div>
+        `;
+        chatMessages.innerHTML = welcomeHtml;
+        lucide.createIcons();
+        return;
+      }
+
+      chatHistory.forEach(msg => {
+        const timeStr = new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        appendMessage(msg.sender, msg.text, timeStr, msg.modelUsed || "");
+      });
+    }
+
+    // Submit user message
+    async function sendMessage(text) {
+      if (!text.trim()) return;
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+      // Append User message
+      appendMessage('User', text, timeStr);
+      chatHistory.push({ sender: 'User', text: text, timestamp: now.toISOString() });
+      localStorage.setItem('smartlearn_chat_history', JSON.stringify(chatHistory));
+
+      userInput.value = '';
+
+      // Prepare payload replicating Spring Boot's TutorRequest DTO
+      const requestPayload = {
+        studentName: studentProfile.name,
+        educationLevel: studentProfile.level,
+        subjectArea: studentProfile.targetSubject,
+        teachingPersona: personaSelect.value,
+        message: text,
+        model: modelSelect.value,
+        chatHistory: chatHistory.map(h => ({
+          role: h.sender === 'User' ? 'user' : 'model',
+          message: h.text
+        }))
+      };
+
+      // Loading Indicator
+      const loadingDiv = document.createElement('div');
+      loadingDiv.id = 'chat-loading';
+      loadingDiv.className = 'flex gap-4 max-w-3xl mr-auto leading-relaxed animate-pulse';
+      loadingDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100 shadow-sm"><i data-lucide="bot" class="w-4 h-4"></i></div>
+        <div class="space-y-2">
+          <div class="bg-white border border-slate-200 px-5 py-4 rounded-2xl rounded-tl-none shadow-sm">
+            <div class="flex items-center gap-1">
+              <span class="h-2 w-2 bg-indigo-500 rounded-full animate-bounce"></span>
+              <span class="h-2 w-2 bg-indigo-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+              <span class="h-2 w-2 bg-indigo-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+            </div>
+          </div>
+          <span class="text-[10px] text-slate-400 ml-1">Tutor thinking...</span>
+        </div>
+      `;
+      chatMessages.appendChild(loadingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      lucide.createIcons();
+
+      try {
+        // Send request to our REST API proxy
+        const response = await fetch('/api/tutor', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestPayload)
+        });
+
+        if (!response.ok) {
+          let errorMsg = 'REST API communication failure.';
+          try {
+            const errJson = await response.json();
+            if (errJson && errJson.details) {
+              errorMsg = errJson.details;
+            } else if (errJson && errJson.error) {
+              errorMsg = errJson.error;
+            }
+          } catch (e) {}
+          throw new Error(errorMsg);
+        }
+
+        const data = await response.json();
+        
+        // Remove loading
+        const loader = document.getElementById('chat-loading');
+        if (loader) loader.remove();
+
+        // Append AI response
+        const aiResponseText = data.response || "I had trouble generating a response. Please try again!";
+        const modelUsed = data.modelUsed || "";
+        appendMessage('AI', aiResponseText, new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), modelUsed);
+        
+        chatHistory.push({ sender: 'AI', text: aiResponseText, timestamp: new Date().toISOString(), modelUsed: modelUsed });
+        localStorage.setItem('smartlearn_chat_history', JSON.stringify(chatHistory));
+
+      } catch (error) {
+        console.error(error);
+        const loader = document.getElementById('chat-loading');
+        if (loader) loader.remove();
+
+        appendMessage('AI', `⚠️ **System Communication Error**: ${error.message || 'Failed to connect to the backend REST API. Please ensure your backend is active.'}`);
+      }
+    }
+
+    // Apply quick suggestions
+    function applySuggestion(suggestionText) {
+      sendMessage(suggestionText);
+    }
+
+    // Listen to form submit
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = userInput.value;
+      if (val.trim()) {
+        sendMessage(val);
+      }
+    });
+
+    // Clear Chat Button
+    clearChatBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to clear your learning chat history?")) {
+        chatHistory = [];
+        localStorage.removeItem('smartlearn_chat_history');
+        renderHistory();
+      }
+    });
+
+    // Persona change handler
+    personaSelect.addEventListener('change', () => {
+      studentProfile.persona = personaSelect.value;
+      localStorage.setItem('smartlearn_profile', JSON.stringify(studentProfile));
+    });
+
+    // On load, check for redirected mathematical explanation requests from Calculator.html
+    window.addEventListener('DOMContentLoaded', () => {
+      renderHistory();
+      const queryParams = new URLSearchParams(window.location.search);
+      const mathFormula = queryParams.get('explain_math');
+      if (mathFormula) {
+        // Send the query automatically
+        sendMessage(`Could you explain the step-by-step breakdown of this math equation: ${mathFormula}`);
+        // Clean up URL so refresh doesn't trigger it again
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    });
+  </script>
+</body>
+</html>
